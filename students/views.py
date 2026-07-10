@@ -1,7 +1,7 @@
 from .forms import StudentForm
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Student
-
+from django.core.paginator import Paginator
 # ==========================================
 # CREATE USING MODEL FORM
 # ==========================================
@@ -38,10 +38,11 @@ def add_student(request):
 # READ + SEARCH STUDENT
 # ==========================================
 
+# Display student list with Search + Pagination
 def student_list(request):
 
     # Get search text from URL
-    search = request.GET.get("search")
+    search = request.GET.get("search", "").strip()
 
     if search:
 
@@ -52,13 +53,23 @@ def student_list(request):
 
     else:
 
+        # ORM: Get all students
         students = Student.objects.all()
+
+    # Pagination
+    paginator = Paginator(students, 5)
+
+    # Get current page number
+    page_number = request.GET.get("page")
+
+    # Get records of current page
+    page_obj = paginator.get_page(page_number)
 
     return render(
         request,
         "students/student_list.html",
         {
-            "students": students,
+            "page_obj": page_obj,
             "search": search
         }
     )
