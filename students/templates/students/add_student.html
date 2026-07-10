@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    
+    <h1>Add Student</h1>
+
+    <a href="/list/" class="btn btn-primary">
+        View Student List
+    </a>
+
+</div>
+{% if success %}
+<div class="alert alert-success">
+    Student added successfully!
+</div>
+{% endif %}
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-success">
+        Save Student
+    </button>
+
+</form>
+
+{% endblock %}

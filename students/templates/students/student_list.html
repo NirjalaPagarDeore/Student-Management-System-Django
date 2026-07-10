@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block content   %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    
+    <h1>Student List</h1>
+
+    <a href="/add/" class="btn btn-primary">
+        Add Student
+    </a>
+
+</div>
+{% if success %}
+    <p style="color: green;">
+        Student added successfully!
+    </p>
+{% endif %}
+
+{% if updated %}
+<p style="color:blue;">
+    Student updated successfully!
+</p>
+{% endif %}
+
+{% if deleted %}
+<p style="color:red;">
+    Student deleted successfully!
+</p>
+{% endif %}
+
+
+
+<form method="GET" class="mb-3">
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <input
+                type="text"
+                name="search"
+                class="form-control"
+                placeholder="Search by Name"
+                value="{{ search }}">
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button class="btn btn-success">
+                Search
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Course</th>
+      <th scope="col">Email</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+     {% for student in students %}
+    <tr>
+      <th scope="row">{{ student.id }}</th>
+    
+      <td>{{ student.name }}</td>
+      <td>{{ student.course }}</td>
+      <td>{{ student.email }}</td>
+      <td>
+         <a href="/view/{{ student.id }}">
+            View
+    </a> |
+        <a href="/edit/{{ student.id }}/">
+            Edit
+        </a>
+           |
+
+    <a href="/delete/{{ student.id }}/"
+       onclick="return confirm('Are you sure?')">
+
+        Delete
+
+    </a>
+   
+
+    </td>
+    </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
