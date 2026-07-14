@@ -2,10 +2,12 @@ from .forms import StudentForm
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Student
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 # ==========================================
 # CREATE USING MODEL FORM
 # ==========================================
-
+@login_required
 def add_student(request):
 
     if request.method == "POST":
@@ -39,6 +41,7 @@ def add_student(request):
 # ==========================================
 
 # Display student list with Search + Pagination
+@login_required
 def student_list(request):
 
     # Get search text from URL
@@ -77,7 +80,7 @@ def student_list(request):
 # ==========================================
 # UPDATE STUDENT USING MODELFORM
 # ==========================================
-
+@login_required
 def edit_student(request, id):
 
     # Get the student record
@@ -114,6 +117,7 @@ def edit_student(request, id):
 # ==========================
 # DELETE OPERATION
 # ==========================
+@login_required
 def delete_student(request, id):
 
     # ORM: Fetch one student using its ID
@@ -129,7 +133,7 @@ def delete_student(request, id):
 # ==========================================
 # VIEW SINGLE STUDENT
 # ==========================================
-
+@login_required
 def view_student(request, id):
 
       # Get the student or return a 404 page if not found
@@ -142,3 +146,53 @@ def view_student(request, id):
             "student": student
         }
     )
+
+
+# User Login
+def user_login(request):
+
+    if request.user.is_authenticated:
+      return redirect("student_list")
+
+    if request.method == "POST":
+
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        # Check username and password
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
+        if user is not None:
+
+            # Login the user
+            login(request, user)
+
+            # Redirect to Student List
+            return redirect("student_list")
+
+        else:
+
+            return render(
+                request,
+                "students/login.html",
+                {
+                    "error": "Invalid Username or Password"
+                }
+            )
+
+    return render(
+        request,
+        "students/login.html"
+    )
+
+
+# User Logout
+def user_logout(request):
+
+    logout(request)
+
+    return redirect("login")
