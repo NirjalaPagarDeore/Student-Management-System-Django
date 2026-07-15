@@ -37,4 +37,7 @@ class StudentForm(forms.ModelForm):
              "email": forms.TextInput(attrs={
                 "class": "form-control"
             }),
+            "photo": forms.FileInput(attrs={
+            "class" : "form-control"
+             }),
         }

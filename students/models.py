@@ -8,6 +8,12 @@ class Student(models.Model):
     # New Field
     email = models.EmailField(null=True, blank=True)
 
+    photo = models.ImageField(
+    upload_to="students/",
+    null=True,
+    blank=True
+)
+
     def __str__(self):
         return self.name
     

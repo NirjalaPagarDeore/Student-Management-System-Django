@@ -13,7 +13,7 @@ def add_student(request):
     if request.method == "POST":
 
         # Create a form object with submitted data
-        form = StudentForm(request.POST)
+        form = StudentForm(request.POST, request.FILES)
 
         # Check if the submitted data is valid
         if form.is_valid():

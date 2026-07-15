@@ -7,6 +7,17 @@
 <div class="card">
 
     <div class="card-body">
+        {% if student.photo %}
+
+<img src="{{ student.photo.url }}"
+     width="180"
+     class="img-thumbnail mb-3">
+
+{% else %}
+
+<p>No Photo Available</p>
+
+{% endif %}
 
         <p><strong>Name :</strong> {{ student.name }}</p>
 

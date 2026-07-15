@@ -60,16 +60,35 @@
 <table class="table">
   <thead>
     <tr>
+        <th>Photo</th>
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">Course</th>
       <th scope="col">Email</th>
+      
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
      {% for student in page_obj  %}
     <tr>
+        <td>
+
+    {% if student.photo %}
+
+        <img
+            src="{{ student.photo.url }}"
+            width="60"
+            height="60"
+            class="rounded-circle">
+
+    {% else %}
+
+        No Photo
+
+    {% endif %}
+
+</td>
       <th scope="row">{{ page_obj.start_index|add:forloop.counter0 }}</th>
     
       <td>{{ student.name }}</td>
