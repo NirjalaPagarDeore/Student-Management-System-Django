@@ -90,7 +90,7 @@ def edit_student(request, id):
 
         # Create form with submitted data
         # instance=student tells Django to UPDATE this record
-        form = StudentForm(request.POST, instance=student)
+        form = StudentForm( request.POST, request.FILES, instance=student )
 
         # Validate form data
         if form.is_valid():
