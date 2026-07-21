@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content   %}
+
+{% load static %}
+<div class="row">
+      <div class="col-md-4">
+<div class="card" style="width: 18rem;">
+  <img src="{% static 'images/student.jpg' %}"
+     class="card-img-top"
+     alt="Student"  style="height: 220px; object-fit: cover;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Students</h5>
+    <p>Total Students: {{ total_students }}</p>
+    <a href="/add/" class="btn btn-primary">Add </a>
+     <a href="/list/" class="btn btn-primary">View</a>
+  </div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card" style="width: 18rem;">
+  <img src="{% static 'images/student.jpg' %}"
+     class="card-img-top"
+     alt="Student"  style="height: 220px; object-fit: cover;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Courses</h5>
+    <p>Total Courses: {{ total_courses }}</p>
+    <a href="/course/" class="btn btn-primary">Add </a>
+     <a href="/course_list/" class="btn btn-primary">View</a>
+  </div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card" style="width: 18rem;">
+  <img src="{% static 'images/student.jpg' %}"
+     class="card-img-top"
+     alt="Student"  style="height: 220px; object-fit: cover;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Search</h5>
+    <p>Total Courses: {{ total_students }}</p>
+    <a href="/course/" class="btn btn-primary">Add </a>
+     <a href="/course_list/" class="btn btn-primary">View</a>
+  </div>
+</div>
+</div>
+</div>
+    
+{% endblock %}

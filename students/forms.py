@@ -1,6 +1,6 @@
 from django import forms
 from .models import Student
-
+from .models import Course
 
 # ==========================================
 # Student Form
@@ -30,8 +30,8 @@ class StudentForm(forms.ModelForm):
                 "class": "form-control"
             }),
 
-            "course": forms.TextInput(attrs={
-                "class": "form-control"
+            "course": forms.Select(attrs={
+             "class": "form-control"
             }),
 
              "email": forms.TextInput(attrs={
@@ -40,4 +40,27 @@ class StudentForm(forms.ModelForm):
             "photo": forms.FileInput(attrs={
             "class" : "form-control"
              }),
+        }
+
+
+class CourseForm(forms.ModelForm):
+
+    class Meta:
+        model = Course
+        fields = "__all__"
+
+        widgets = {
+
+            "course_name": forms.TextInput(attrs={
+                "class": "form-control"
+            }),
+
+            "fee": forms.NumberInput(attrs={
+                "class": "form-control"
+            }),
+
+            "duration": forms.TextInput(attrs={
+                "class": "form-control"
+            }),
+
         }

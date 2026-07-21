@@ -5,7 +5,10 @@ import os
 class Student(models.Model):
     name = models.CharField(max_length=100)
     age = models.IntegerField()
-    course = models.CharField(max_length=100)
+    course = models.ForeignKey(
+    "Course",
+    on_delete=models.CASCADE
+    )
     # New Field
     email = models.EmailField(null=True, blank=True)
 
@@ -37,3 +40,11 @@ class Student(models.Model):
 
 
 
+class Course(models.Model):
+    course_name = models.CharField(max_length=100)
+    fee = models.IntegerField()
+    duration = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.course_name
+  
